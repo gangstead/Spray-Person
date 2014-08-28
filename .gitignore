@@ -35,5 +35,7 @@ Icon
 .Spotlight-V100
 .Trashes
 
-
+target/
 project/target/
+*.class
+*.cache
