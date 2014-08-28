@@ -24,7 +24,7 @@ class ApiRouterActor @Inject()(asb: ActorSystemBean)extends Actor
   def receive = runRoute {
      compressResponseIfRequested(){
        alwaysCache(simpleCache) {
-         pathPrefix("person") { ctx => asb.tacoActor ! ctx }
+         pathPrefix("person") { ctx => asb.personActor ! ctx }
        }
        
      }

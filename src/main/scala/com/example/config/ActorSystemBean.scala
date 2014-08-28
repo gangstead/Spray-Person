@@ -23,14 +23,14 @@ class SpringExt(system: ExtendedActorSystem) extends Extension {
 @Named
 class ActorSystemBean  @Inject() (ctx: ApplicationContext) {
   
-   implicit val system = ActorSystem("taco")
+   implicit val system = ActorSystem("person")
 
   /**
    * This stores the ApplicationContext within the ActorSystem’s Spring
    * extension for later use.
    */
   SpringExt(system).ctx = ctx
-  lazy val tacoActor = system.actorOf(Props(SpringExt(system).ctx.getBean(classOf[PersonActor])))
+  lazy val personActor = system.actorOf(Props(SpringExt(system).ctx.getBean(classOf[PersonActor])))
   lazy val apiRouterActor = system.actorOf(Props(SpringExt(system).ctx.getBean(classOf[ApiRouterActor])))
   
 
