@@ -11,12 +11,12 @@
 			classpath:applicationContext.xml
 		</param-value>
 	</context-param>
- 
+
 	<listener>
 		<listener-class>
 			org.springframework.web.context.ContextLoaderListener
 		</listener-class>
-	</listener>	
+	</listener>
 
     <listener>
         <listener-class>spray.servlet.Initializer</listener-class>
@@ -30,7 +30,7 @@
 
     <servlet-mapping>
         <servlet-name>SprayConnectorServlet</servlet-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/app/*</url-pattern>
     </servlet-mapping>
 
 </web-app>
