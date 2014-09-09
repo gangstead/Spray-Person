@@ -4,11 +4,13 @@ version       := "0.1"
 
 scalaVersion  := "2.10.3"
 
+jetty()
+
 scalacOptions := Seq("-unchecked", "-deprecation", "-encoding", "utf8", "-feature")
 
 resolvers ++= Seq(
   "spray repo" at "http://repo.spray.io/",
-  "SpringSource Milestone Repository" at "http://repo.springsource.org/milestone" 
+  "SpringSource Milestone Repository" at "http://repo.springsource.org/milestone"
 )
 
 libraryDependencies ++= {
@@ -18,8 +20,8 @@ libraryDependencies ++= {
     "io.spray"            %   "spray-servlet"     % sprayV,
     "io.spray"            %   "spray-routing"     % sprayV,
     "io.spray"            %   "spray-testkit"     % sprayV,
-    "io.spray"            %   "spray-client"      % sprayV,    
-    "io.spray"            %   "spray-util"        % sprayV,  
+    "io.spray"            %   "spray-client"      % sprayV,
+    "io.spray"            %   "spray-util"        % sprayV,
     "io.spray"            %   "spray-caching"     % sprayV,
     "io.spray"            %%  "spray-json"        % "1.2.5",
     "com.typesafe.akka"   %%  "akka-slf4j"        % "2.1.4",
@@ -37,4 +39,4 @@ libraryDependencies ++= {
   )
 }
 
-seq(webSettings: _*)
+webappSrc in webapp := baseDirectory.value / "app"
