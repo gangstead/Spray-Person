@@ -9,7 +9,7 @@ import org.springframework.context.ApplicationContext
 import akka.actor.ExtensionKey
 import akka.actor.ExtendedActorSystem
 import com.example.actors.routes.ApiRouterActor
-import com.example.actors.routes.PersonActor
+import com.example.actors.routes.PersonRoute
 
 
 /**
@@ -30,7 +30,7 @@ class ActorSystemBean  @Inject() (ctx: ApplicationContext) {
    * extension for later use.
    */
   SpringExt(system).ctx = ctx
-  lazy val personActor = system.actorOf(Props(SpringExt(system).ctx.getBean(classOf[PersonActor])))
+  lazy val personRoute = system.actorOf(Props(SpringExt(system).ctx.getBean(classOf[PersonRoute])))
   lazy val apiRouterActor = system.actorOf(Props(SpringExt(system).ctx.getBean(classOf[ApiRouterActor])))
   
 

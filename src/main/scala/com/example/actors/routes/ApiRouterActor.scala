@@ -23,10 +23,7 @@ class ApiRouterActor @Inject()(asb: ActorSystemBean)extends Actor
   val simpleCache = routeCache(maxCapacity = 1000, timeToIdle = Duration("30 min"))
   def receive = runRoute {
      compressResponseIfRequested(){
-       alwaysCache(simpleCache) {
-         pathPrefix("person") { ctx => asb.personActor ! ctx }
-       }
-       
+         pathPrefix("person") { ctx => asb.personRoute ! ctx }
      }
     
   }

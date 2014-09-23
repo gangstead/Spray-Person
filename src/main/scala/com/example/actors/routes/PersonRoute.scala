@@ -15,7 +15,7 @@ import com.example.services.PersonService
 
 @Named
 @Scope("prototype")
-class PersonActor  @Inject()(personService: PersonService, asb: ActorSystemBean) extends HttpServiceActor 
+class PersonRoute  @Inject()(personService: PersonService, asb: ActorSystemBean) extends HttpServiceActor 
 																	with ActorLogging {
    import asb.system.dispatcher
    
