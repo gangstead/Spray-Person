@@ -45,7 +45,3 @@ project/target/
 bower_components/
 node_modules/
 tmp/
-
-bower_components/
-node_modules/
-tmp/
