@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('gangstead.SprayPersonApp')
+angular.module('gangstead.SprayPerson')
 
   .directive('ngHelloWorld', function() {
 
