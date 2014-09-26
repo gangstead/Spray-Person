@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('gangstead.SprayPerson', ['ngAnimate', 'ngRoute'])
+angular.module('gangstead.SprayPerson', ['ngAnimate', 'ngRoute','ngResource'])
 
   .constant('version', 'v0.1.0')
 
@@ -10,10 +10,12 @@ angular.module('gangstead.SprayPerson', ['ngAnimate', 'ngRoute'])
 
     $routeProvider
       .when('/', {
-        templateUrl: 'views/home.html'
+        templateUrl: 'views/home.html',
+        controller: 'MainCtrl'
       })
       .when('/person', {
-        templateUrl: 'views/person.html'
+        templateUrl: 'views/person.html',
+        controller: 'PersonCtrl'
       })
       .otherwise({
         redirectTo: '/'

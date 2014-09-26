@@ -29,13 +29,10 @@ Wire up the dependencies with `grunt bowerInstall`
 *This modifies `app\index.html` to include your dependencies*
 
 
-## Documentation
 
-### Running the Spray-Person
+## Running Spray-Person
 Start sbt with `sbt`
 
 Start the container with `~container:start` (the ~ tells sbt to reload when any files change)
 
 Navigate to the home page [http://localhost:8080/index.html](http://localhost:8080/index.html)
-## Examples
-_(Coming soon)_
