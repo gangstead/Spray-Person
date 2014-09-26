@@ -13,7 +13,7 @@ class PersonServiceImpl @Inject()(asb: ActorSystemBean) extends PersonService {
   import PersonData._
 
   def getPersonList():List[Person] = {
-    testPeople collect {case p: Person if p.id.isDefined => p}
+    testPeople
   }
 
   def getPersonById(PersonId:Long):Option[Person] ={
