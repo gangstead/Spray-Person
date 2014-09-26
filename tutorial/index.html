@@ -11,23 +11,23 @@
         <p>More specifically, we'll use an Angular front-end client
             to interact with the API developed in Spray
         </p>
-    </div> 
-    
+    </div>
+
     <div>
         <h2>Background</h2>
         <p>AngularJS front-ends are quickly becoming the norm when developing Web Applications. Those front-ends
-          require a Restful back-end to communicate with for Creating, Reading, Updating, and Deleting data. For 
+          require a Restful back-end to communicate with for Creating, Reading, Updating, and Deleting data. For
           this tutorial you will learn how to create a Spray Restful API that will be used by an AngularJS front-end.
         </p>
-    </div> 
-    
+    </div>
+
     <div>
         <h2>Person HTTP API</h2>
         <p><h3>Service Provider</h3></p>
-        <p>The API for managing <a href="#code/src/main/scala/com/example/model/Peron.scala" class="shortcut">Person</a> 
-           is provided by the Route (named personRoute) defined on the 
+        <p>The API for managing <a href="#code/src/main/scala/com/example/model/Peron.scala" class="shortcut">Person</a>
+           is provided by the Route (named personRoute) defined on the
         <a href="#code/src/main/scala/com/example/actors/routes/PersonRoute.scala" class="shortcut">PersonRoute</a> class.</p>
-        
+
         <p><h3>API Summary</h3></p>
         <p>GET /person to get all Persons<br/>
            POST /person to create a new Person<br/>
@@ -35,7 +35,7 @@
            PUT /person/${personId} to update a specific Person<br/>
            DELETE /person/{$personId} to delete a specific Person</p>
            <p><i>Note: ${personId} is an IntNumber, and the ID of the Person, i.e id == person.id</i></p>
-        
+
         <p><h3>API Details</h3></p>
         <p><b>Description:</b> Get all Persons<br/>
            <b>Method:</b> GET <br/>
@@ -57,7 +57,7 @@
     }
 ]
            </code></pre>
-           
+
         <p><b>Description:</b> Create a Person<br/>
            <b>Method:</b> POST <br/>
            <b>Path:</b> /api/person</p>
@@ -78,7 +78,7 @@
     "age": 5
 }
            </code></pre>
-           
+
         <p><b>Description:</b> Get a specific Person<br/>
            <b>Method:</b> GET <br/>
            <b>Path:</b> api/person/${personId}</p>
@@ -91,7 +91,7 @@
     "age": 15
 }
            </code></pre>
-           
+
         <p><b>Description:</b> Update a specific Person<br/>
            <b>Method:</b> PUT <br/>
            <b>Path:</b> /api/person/${personId}</p>
@@ -104,34 +104,34 @@
         "age": 5
     }' \
 > http://localhost:8080/api/person/3
-204 
-           </code></pre>    
-           
+204
+           </code></pre>
+
         <p><b>Description:</b> Delete a specific Person<br/>
            <b>Method:</b> DELETE <br/>
            <b>Path:</b> /api/person/${personId}</p>
            <b>Sample Call:</b><br/>
-           <pre><code>bash-3.2$ curl -X DELETE http://localhost:8080/api/person/1</code></pre>                                
-                      
+           <pre><code>bash-3.2$ curl -X DELETE http://localhost:8080/api/person/1</code></pre>
+
     </div>
-    
+
     <div>
         <h2>A Minor Caveat</h2>
         <p>
           The purpose of this template is to show you how to integrate an AngularJS front-end to a Spray Restful
           back-end. So keep in mind that the data return through the endpoints is mocked data and no database was used
-          to store data. This template also made use of Spring Dependcey Framework for Dependecy Injection. 
+          to store data. This template also made use of Spring Dependcey Framework for Dependecy Injection.
         </p>
-    </div>   
-    
+    </div>
+
     <div>
         <h2>PersonRoute</h2>
         <p><a href="#code/src/main/scala/com/example/actors/routes/PersonRoute.scala" class="shortcut">PersonRoute</a>
-         extends <a href="https://github.com/spray/spray/blob/master/spray-routing/src/main/scala/spray/routing/HttpServiceActor.scala" target="_blank">spray.routing.HttpServiceActor</a>, 
+         extends <a href="https://github.com/spray/spray/blob/master/spray-routing/src/main/scala/spray/routing/HttpServiceActor.scala" target="_blank">spray.routing.HttpServiceActor</a>,
          and provides the RESTful API for managing Person model object by injecting the <a href="#code/src/main/scala/com/example/services/PersonService.scala" target="_blank">PersonService</a></p>
         <p>Let's step through the code:</p>
-        
-        <p>1.  We first set up the routes for the GETS</p>         
+
+        <p>1.  We first set up the routes for the GETS</p>
           <pre><code>
 get {
         pathEnd {
@@ -139,7 +139,7 @@ get {
            personList match{
              case head::tail => complete(personList)
              case nil => complete(StatusCodes.NoContent)
-             
+
            }
             complete(personList)
           }~
@@ -147,10 +147,10 @@ get {
             val person = personService.getPersonById(personId)
             complete(person)
           }
-     }         
-          </code></pre>  
+     }
+          </code></pre>
 
-          <p>2.  Next we setup the POST Route</p>   
+          <p>2.  Next we setup the POST Route</p>
           <pre><code>
              post {
        pathEnd {
@@ -161,7 +161,7 @@ get {
       }
     }
           </code></pre>
-          <p>3.  Afer the POST Route we setup the PUT Route</p>   
+          <p>3.  Afer the POST Route we setup the PUT Route</p>
           <pre><code>
               put{
         path(LongNumber){personId =>
@@ -170,19 +170,19 @@ get {
       }
           </code></pre>
 
-          <p>4.  Lastly we setup the DELETE Route</p>   
+          <p>4.  Lastly we setup the DELETE Route</p>
           <pre><code>
               delete{
         path(LongNumber){pesonId =>
            complete(StatusCodes.NoContent)
         }
-      } 
+      }
           </code></pre>
 
 
 
 
-    </div>                        
+    </div>
 
 </body>
 </html>
