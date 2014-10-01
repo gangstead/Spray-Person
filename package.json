@@ -1,5 +1,5 @@
 {
-  "name": "spray-person-app",
+  "name": "spray-person",
   "version": "0.1.0",
   "description": "Angular JS front end with REST api powered by Spray.  Typesafe Activator template created by Credera",
   "keywords": [

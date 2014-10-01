@@ -65,7 +65,6 @@
            <pre><code>bash-3.2$ curl -X POST \
 > -H "Content-Type: application/json" \
 > -d '{
-        "id": 1,
         "firstName": "Bill",
         "lastName": "Smith",
         "age": 5
@@ -181,6 +180,76 @@ get {
 
 
 
+
+    </div>
+    <div>
+        <h2>Front End</h2>
+        <p>
+          Now that the REST api is working it's time to get the Angular front end to work.
+        </p>
+        <p><h3>Install NPM</h3></p>
+        <p>
+          The Front end requires Bower and Grunt, which are both NPM packages. Don't worry, you'll still be using Activator to run the app.  Your options for installing NPM are:
+          <ul>
+            <li>If you have a fancy package manager you can use
+              <ul>
+                <li><code>`brew install npm`</code> (mac)</li>
+                <li><code>`choco install npm`</code> (pc)</li>
+              </ul>
+            </li>
+            <li>Otherwise visit <a href="https://www.npmjs.org/doc/README.html" target="_blank">https://www.npmjs.org/doc/README.html</a> for complete instructions</li>
+          </ul>
+        </p>
+        <p><h3>Install Bower</h3></p>
+        <p>
+          Bower is a front end dependency manager.  Install with <pre><code>npm install -g bower</code></pre>
+        </p>
+        <p>
+          Then download all the front end dependencies (Angular, etc.) with <pre><code>bower install</code></pre>
+        </p>
+        <p>
+          Bower will put them in your <a href="#code/app/bower_components" class="shortcut">bower_components</a> directory as instructed by <a href="#code/.bowerrc" class="shortcut">.bowerrc</a>
+        </p>
+        <p><h3>Install Grunt CLI</h3></p>
+        <p>
+          Grunt is a front end task runner.  Install with <pre><code>npm install -g grunt-cli</code></pre>
+        </p>
+        <p>
+          Then wire up the dependencies with <pre><code>grunt bowerInstall</code></pre>
+        </p>
+        <p>
+          Grunt will modify <a href="#code/app/index.html" class="shortcut">app\index.html</a> to include your dependencies
+        </p>
+        <p><h3>Visit the page!</h3></p>
+        <p>With the application running visit the page at:<pre><code><a href="http://localhost:8080/index.html" target="_blank">http://localhost:8080/index.html</a></code></pre>
+    </div>
+    <div>
+      <h2>Angular App Overview</h2>
+      <p>
+        Angular.js is too large of a frame work to explain here, but here's a starting point to understanding the code.
+      </p>
+      <p>
+        All of the content of the app is served from the static content directory. Which is specified in <a href="#code/build.sbt" class="shortcut">build.sbt</a> to be:
+        <pre><code>webappSrc in webapp := baseDirectory.value / "app"</code></pre>
+      </p>
+      <p>
+        In <a href="#code/app/index.html" class="shortcut">app\index.html</a> after the angular dependencies are included then the files for the angular app itself are included:
+        <ul>
+          <li>scripts/app.js</li>
+          <li>scripts/controllers/main.js</li>
+          <li>scripts/services/services.js</li>
+        </ul>
+      </p>
+      <p>
+        In <a href="#code/app/scripts/app.js" class="shortcut">app/scripts/app.js</a> the router determines which view to resolve based on the Angular route (the part after the #, which is not sent to the server).
+        The router also determines which <a href="#code/app/scripts/controllers/main.js" class="shortcut">controller</a> to make active.
+      </p>
+      <p>
+        The <a href="#code/app/scripts/services/services.js" class="shortcut">GetPeople service</a> actually binds a REST endpoint of our Spray app to a javascript object.
+      </p>
+      <p>
+        The <a href="#code/app/views/person.html" class="shortcut">person view</a> iterates through our people returned by the REST back end and puts them on the page.
+      </p>
 
     </div>
 
