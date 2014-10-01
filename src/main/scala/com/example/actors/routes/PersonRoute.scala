@@ -15,10 +15,10 @@ import com.example.services.PersonService
 
 @Named
 @Scope("prototype")
-class PersonRoute  @Inject()(personService: PersonService, asb: ActorSystemBean) extends HttpServiceActor 
+class PersonRoute  @Inject()(personService: PersonService, asb: ActorSystemBean) extends HttpServiceActor
 																	with ActorLogging {
    import asb.system.dispatcher
-   
+
    def receive = runRoute {
      get {
         pathEnd {
@@ -26,7 +26,7 @@ class PersonRoute  @Inject()(personService: PersonService, asb: ActorSystemBean)
            personList match{
              case head::tail => complete(personList)
              case nil => complete(StatusCodes.NoContent)
-             
+
            }
             complete(personList)
           }~
@@ -52,8 +52,8 @@ class PersonRoute  @Inject()(personService: PersonService, asb: ActorSystemBean)
         path(LongNumber){pesonId =>
            complete(StatusCodes.NoContent)
         }
-      } 
+      }
    }
-   
+
 
 }

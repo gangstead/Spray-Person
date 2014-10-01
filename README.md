@@ -7,7 +7,7 @@ Angular JS front end with REST api powered by Spray.  Typesafe Activator templat
 Front end requires Bower, which requires npm
 
 ### Install NPM:
-But this is an SBT app?!?  For the front end dependency management you will need npm.
+But this is an scala app and I already have SBT!!  For the front end dependency management you will need npm.
 
 Options
 - https://www.npmjs.org/doc/README.html
@@ -33,6 +33,8 @@ Wire up the dependencies with `grunt bowerInstall`
 ## Running Spray-Person
 Start sbt with `sbt`
 
-Start the container with `~container:start` (the ~ tells sbt to reload when any files change)
+Start the container with `~container:start` (the `~` tells sbt to reload when any files change)
 
-Navigate to the home page [http://localhost:8080/index.html](http://localhost:8080/index.html)
+Navigate to the home page [http://localhost:8080/index.html](http://localhost:8080/index.html) to see the Angular app
+
+Or do a GET request to [http://localhost:8080/api/person](http://localhost:8080/api/person) to hit the REST endpoint directly
