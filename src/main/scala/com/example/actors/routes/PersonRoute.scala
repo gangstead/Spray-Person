@@ -1,23 +1,20 @@
 package com.example.actors.routes
 
 import spray.routing.HttpServiceActor
-import javax.inject.Inject
 import com.example.config.ActorSystemBean
 import akka.actor.ActorLogging
-import javax.inject.Named
-import org.springframework.context.annotation.Scope
 import com.example.model.Person
 import com.example.model.PersonJsonProtocol._
 import spray.httpx.SprayJsonSupport._
 import spray.http.StatusCodes
 import com.example.services.PersonService
+import akka.actor.Props
 
+object PersonRoute {
+	def props(personService: PersonService): Props = Props(new PersonRoute(personService))
+}
 
-@Named
-@Scope("prototype")
-class PersonRoute  @Inject()(personService: PersonService, asb: ActorSystemBean) extends HttpServiceActor
-																	with ActorLogging {
-   import asb.system.dispatcher
+class PersonRoute(personService: PersonService) extends HttpServiceActor {
 
    def receive = runRoute {
      get {

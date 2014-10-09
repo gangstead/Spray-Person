@@ -9,8 +9,7 @@ jetty()
 scalacOptions := Seq("-unchecked", "-deprecation", "-encoding", "utf8", "-feature")
 
 resolvers ++= Seq(
-  "spray repo" at "http://repo.spray.io/",
-  "SpringSource Milestone Repository" at "http://repo.springsource.org/milestone"
+  "spray repo" at "http://repo.spray.io/"
 )
 
 libraryDependencies ++= {
@@ -32,10 +31,7 @@ libraryDependencies ++= {
     "org.eclipse.jetty.orbit" %   "javax.servlet" % "3.0.0.v201112011016" % "container"  artifacts Artifact("javax.servlet", "jar", "jar"),
     "com.typesafe.akka"   %%  "akka-actor"    % akkaV,
     "com.typesafe.akka"   %%  "akka-testkit"  % akkaV,
-    "org.specs2"          %%  "specs2"        % "2.2.3" % "test",
-    "org.springframework.scala" % "spring-scala" % "1.0.0.M2",
-    "org.springframework" % "spring-web" % "3.2.2.RELEASE",
-    "javax.inject" % "javax.inject" % "1"
+    "org.specs2"          %%  "specs2"        % "2.2.3" % "test"
   )
 }
 

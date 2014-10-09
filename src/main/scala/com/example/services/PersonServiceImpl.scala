@@ -1,15 +1,13 @@
 package com.example.services
 
-import javax.inject.Inject
-import javax.inject.Named
 import scala.math
 import com.example.model.Person
 import com.example.config.ActorSystemBean
+import akka.actor.Props
 
-@Named
-class PersonServiceImpl @Inject()(asb: ActorSystemBean) extends PersonService {
-  import asb._ // make the implicit ActorSystem available for sendRecieve
-  import asb.system.dispatcher // execution context for futures below
+class PersonServiceImpl extends PersonService {
+//  import asb._ // make the implicit ActorSystem available for sendRecieve
+//  import asb.system.dispatcher // execution context for futures below
   import PersonData._
 
   def getPersonList():List[Person] = {
