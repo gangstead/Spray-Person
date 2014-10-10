@@ -19,7 +19,7 @@ class ActorSystemBean {
 
   implicit val system = ActorSystem("person")
 
-  lazy val personRoute = system.actorOf(PersonRoute.props(new PersonServiceImpl()), "person-route")
+  lazy val personRoute = system.actorOf(PersonRoute.props(PersonServiceImpl()), "person-route")
   lazy val apiRouterActor = system.actorOf(ApiRouterActor.props(personRoute),"api-router")
 
 }

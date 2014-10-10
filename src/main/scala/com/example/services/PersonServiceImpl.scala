@@ -5,6 +5,10 @@ import com.example.model.Person
 import com.example.config.ActorSystemBean
 import akka.actor.Props
 
+object PersonServiceImpl {
+  def apply(): PersonServiceImpl = new PersonServiceImpl()
+}
+
 class PersonServiceImpl extends PersonService {
 //  import asb._ // make the implicit ActorSystem available for sendRecieve
 //  import asb.system.dispatcher // execution context for futures below
