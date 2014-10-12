@@ -24,7 +24,7 @@
     <div>
         <h2>Person HTTP API</h2>
         <p><h3>Service Provider</h3></p>
-        <p>The API for managing <a href="#code/src/main/scala/com/example/model/Peron.scala" class="shortcut">Person</a>
+        <p>The API for managing <a href="#code/src/main/scala/com/example/model/Person.scala" class="shortcut">Person</a>
            is provided by the Route (named personRoute) defined on the
         <a href="#code/src/main/scala/com/example/actors/routes/PersonRoute.scala" class="shortcut">PersonRoute</a> class.</p>
 
@@ -126,8 +126,8 @@
     <div>
         <h2>PersonRoute</h2>
         <p><a href="#code/src/main/scala/com/example/actors/routes/PersonRoute.scala" class="shortcut">PersonRoute</a>
-         extends <a href="https://github.com/spray/spray/blob/master/spray-routing/src/main/scala/spray/routing/HttpServiceActor.scala" target="_blank">spray.routing.HttpServiceActor</a>,
-         and provides the RESTful API for managing Person model object by injecting the <a href="#code/src/main/scala/com/example/services/PersonService.scala" target="_blank">PersonService</a></p>
+         extends <a href="http://spray.io/documentation/1.1-SNAPSHOT/api/index.html#spray.routing.HttpServiceActor" target="_blank">spray.routing.HttpServiceActor</a>,
+         and provides the RESTful API for managing Person model object by passing the <a href="#code/src/main/scala/com/example/services/PersonService.scala" target="_blank">PersonService</a> to the constructor.</p>
         <p>Let's step through the code:</p>
 
         <p>1.  We first set up the routes for the GETS</p>
@@ -229,8 +229,10 @@ get {
         Angular.js is too large of a frame work to explain here, but here's a starting point to understanding the code.
       </p>
       <p>
-        All of the content of the app is served from the static content directory. Which is specified in <a href="#code/build.sbt" class="shortcut">build.sbt</a> to be:
-        <pre><code>webappSrc in webapp := baseDirectory.value / "app"</code></pre>
+        All of the content of the app is served from the static content directory. The static content is set by adding <code>app</code>'s parent directory ("/") to the classpath in <a href="#code/build.sbt" class="shortcut">build.sbt</a>:
+        <pre><code>unmanagedResourceDirectories in Compile <+= (baseDirectory)</code></pre>
+        Then in <a href="#code/src/main/scala/com/example/actors/routes/ApiRouterActor.scala">ApiRouterActor</a> serve the static content:
+        <pre><code>getFromResourceDirectory("app")</code></pre>
       </p>
       <p>
         In <a href="#code/app/index.html" class="shortcut">app\index.html</a> after the angular dependencies are included then the files for the angular app itself are included:
