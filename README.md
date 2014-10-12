@@ -33,7 +33,7 @@ Wire up the dependencies with `grunt bowerInstall`
 ## Running Spray-Person
 Start sbt with `sbt`
 
-Start the container with `~container:start` (the `~` tells sbt to reload when any files change)
+Start the application with `activator run` (or `sbt run`, same thing).
 
 Navigate to the home page [http://localhost:8080/index.html](http://localhost:8080/index.html) to see the Angular app
 
