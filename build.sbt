@@ -1,10 +1,10 @@
+name := """spray-person"""
+
 organization  := "com.example"
 
 version       := "0.1"
 
 scalaVersion  := "2.10.3"
-
-jetty()
 
 scalacOptions := Seq("-unchecked", "-deprecation", "-encoding", "utf8", "-feature")
 
@@ -22,16 +22,14 @@ libraryDependencies ++= {
     "io.spray"            %   "spray-client"      % sprayV,
     "io.spray"            %   "spray-util"        % sprayV,
     "io.spray"            %   "spray-caching"     % sprayV,
+    "io.spray"            %   "spray-can"         % sprayV,
     "io.spray"            %%  "spray-json"        % "1.2.5",
     "com.typesafe.akka"   %%  "akka-slf4j"        % "2.1.4",
     "ch.qos.logback"      %   "logback-classic"   % "1.0.13",
-    "org.eclipse.jetty"       %   "jetty-webapp"  % "8.1.13.v20130916" ,
-    "org.eclipse.jetty"       %   "jetty-plus"    % "8.1.13.v20130916" ,
-    "org.eclipse.jetty.orbit" %   "javax.servlet" % "3.0.0.v201112011016" artifacts Artifact("javax.servlet", "jar", "jar"),
     "com.typesafe.akka"   %%  "akka-actor"    % akkaV,
     "com.typesafe.akka"   %%  "akka-testkit"  % akkaV,
     "org.specs2"          %%  "specs2"        % "2.2.3" % "test"
   )
 }
 
-webappSrc in webapp := baseDirectory.value / "app"
+unmanagedResourceDirectories in Compile <+= (baseDirectory) 
