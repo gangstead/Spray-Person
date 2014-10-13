@@ -63,13 +63,13 @@
            <b>Path:</b> /api/person</p>
            <b>Sample Call:</b><br/>
            <pre><code>bash-3.2$ curl -X POST \
-> -H "Content-Type: application/json" \
-> -d '{
+ -H "Content-Type: application/json" \
+ -d '{
         "firstName": "Bill",
         "lastName": "Smith",
         "age": 5
     }' \
-> http://localhost:8080/api/person
+ http://localhost:8080/api/person
 {
     "id": 3,
     "firstName": "Bill",
@@ -96,13 +96,13 @@
            <b>Path:</b> /api/person/${personId}</p>
            <b>Sample Call:</b><br/>
            <pre><code>bash-3.2$ curl -X PUT \
-> -H "Content-Type: application/json" \
-> -d '{
+ -H "Content-Type: application/json" \
+ -d '{
         "firstName": "Bill",
         "lastName": "Smith",
         "age": 5
     }' \
-> http://localhost:8080/api/person/3
+ http://localhost:8080/api/person/3
 204
            </code></pre>
 

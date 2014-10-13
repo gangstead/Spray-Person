@@ -1,10 +1,6 @@
 package com.example.config
 
-import akka.actor._
-import akka.pattern.ask
-import akka.util.Timeout
-import akka.actor.ExtensionKey
-import akka.actor.ExtendedActorSystem
+import akka.actor.ActorSystem
 import com.example.actors.routes.ApiRouterActor
 import com.example.actors.routes.PersonRoute
 import com.example.services.PersonServiceImpl
@@ -20,6 +16,6 @@ class ActorSystemBean {
   implicit val system = ActorSystem("person")
 
   lazy val personRoute = system.actorOf(PersonRoute.props(PersonServiceImpl()), "person-route")
-  lazy val apiRouterActor = system.actorOf(ApiRouterActor.props(personRoute),"api-router")
+  lazy val apiRouterActor = system.actorOf(ApiRouterActor.props(personRoute), "api-router")
 
 }

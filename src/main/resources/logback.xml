@@ -17,7 +17,6 @@
     </appender> -->
 
     <logger name="akka" level="INFO" />
-    <logger name="org.eclipse.jetty" level="INFO" />
     <logger name="com.example" level="DEBUG" />
 
     <root level="DEBUG">

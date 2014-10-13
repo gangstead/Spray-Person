@@ -4,7 +4,7 @@ import akka.io.IO
 import spray.can.Http
 import ActorSystemBean._
 
-object Boot extends App{
+object Boot extends App {
 
   val services = ActorSystemBean()
   implicit val system = services.system

@@ -1,32 +1,41 @@
 package com.example.services
 
-import scala.math
 import com.example.model.Person
-import com.example.config.ActorSystemBean
-import akka.actor.Props
 
 object PersonServiceImpl {
   def apply(): PersonServiceImpl = new PersonServiceImpl()
 }
 
 class PersonServiceImpl extends PersonService {
-//  import asb._ // make the implicit ActorSystem available for sendRecieve
-//  import asb.system.dispatcher // execution context for futures below
-  import PersonData._
+  import PersonData.testPeople
 
-  def getPersonList():List[Person] = {
-    testPeople
+  def getPersons: List[Person] = {
+    testPeople.toList
   }
 
-  def getPersonById(PersonId:Long):Option[Person] ={
-     testPeople find (_.id == Some(PersonId))
+  def getPersonById(personId: Long): Option[Person] = {
+    testPeople find (_.id == Some(personId))
   }
 
-  def addPerson(person:Person):Person ={
-    val maxId = testPeople collect ({case Person(Some(id),_,_,_) => id}) reduceLeft ( _ max _ )
-    val newPerson = new Person(Some(maxId + 1), person.firstName,person.lastName,person.age)
-    testPeople = testPeople :+ newPerson
+  def addPerson(person: Person): Person = {
+    val maxId = testPeople.map(_.id).flatten.max + 1
+    val newPerson = person.copy(id = Some(maxId))
+    testPeople += newPerson
     newPerson
+  }
+
+  def updatePerson(person: Person): Boolean = {
+    testPeople.indexWhere(_.id == person.id) match {
+      case -1 => false
+      case i => testPeople.update(i, person); true
+    }
+  }
+
+  def deletePerson(id: Long): Unit = {
+    getPersonById(id) match {
+      case Some(person) => testPeople -= person
+      case None =>
+    }
   }
 
 }
