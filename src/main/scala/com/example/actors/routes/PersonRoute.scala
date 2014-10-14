@@ -18,10 +18,12 @@ class PersonRoute(personService: PersonService) extends HttpServiceActor {
   def receive = runRoute {
     get {
       pathEnd {
-        val persons = personService.getPersons
-        persons match {
-          case head :: tail => complete(persons)
-          case nil => complete(StatusCodes.NoContent)
+        complete {
+          val persons = personService.getPersons
+          persons match {
+            case head :: tail => persons
+            case nil => StatusCodes.NoContent
+          }
         }
       } ~
       path(LongNumber) { personId =>
