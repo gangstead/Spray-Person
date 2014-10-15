@@ -187,6 +187,13 @@ get {
         <p>
           Now that the REST api is working it's time to get the Angular front end to work.
         </p>
+        <p><h3>Pre-built front end</h3></p>
+        <p>
+          The <a href="#code/dist" class="shortcut">dist</a> directory has been included in the project and is already built including minification.  Running the server will serve the app from here.  Any changes you make in here will get clobbered next time you build the front end with grunt.  Normally this folder is not included in source control.
+        </p>
+        <p>
+          For front end development make your changes to the <a href="#code/app" class="shortcut">app</a> folder and follow the steps below:
+        </p>
         <p><h3>Install NPM</h3></p>
         <p>
           The Front end requires Bower and Grunt, which are both NPM packages. Don't worry, you'll still be using Activator to run the app.  Your options for installing NPM are:
@@ -220,19 +227,26 @@ get {
         <p>
           Grunt will modify <a href="#code/app/index.html" class="shortcut">app\index.html</a> to include your dependencies
         </p>
+        <p><h3>Serve content from development directory</h3></p>
+        <p>
+          All of the content of the app is served from the static content directory. The static content is set by adding <code>dist</code>'s parent directory ("/") to the classpath in <a href="#code/build.sbt" class="shortcut">build.sbt</a>:
+          <pre><code>unmanagedResourceDirectories in Compile <+= (baseDirectory)</code></pre>
+          Then in <a href="#code/src/main/scala/com/example/actors/routes/ApiRouterActor.scala">ApiRouterActor</a> serve the static content:
+          <pre><code>getFromResourceDirectory("dist")</code></pre>
+        </p>
+        <p>
+          The above code will only get updated after you run the <code>grunt build</code> command.  To serve the app directly from the development directory change the resource directive to this:
+          <pre><code>getFromResourceDirectory("app")</code></pre>
+        </p>
         <p><h3>Visit the page!</h3></p>
-        <p>With the application running visit the page at:<pre><code><a href="http://localhost:8080/index.html" target="_blank">http://localhost:8080/index.html</a></code></pre>
+        <p>
+          With the application running visit the page at:<pre><code><a href="http://localhost:8080/index.html" target="_blank">http://localhost:8080/index.html</a></code></pre>
+        </p>
     </div>
     <div>
       <h2>Angular App Overview</h2>
       <p>
         Angular.js is too large of a frame work to explain here, but here's a starting point to understanding the code.
-      </p>
-      <p>
-        All of the content of the app is served from the static content directory. The static content is set by adding <code>app</code>'s parent directory ("/") to the classpath in <a href="#code/build.sbt" class="shortcut">build.sbt</a>:
-        <pre><code>unmanagedResourceDirectories in Compile <+= (baseDirectory)</code></pre>
-        Then in <a href="#code/src/main/scala/com/example/actors/routes/ApiRouterActor.scala">ApiRouterActor</a> serve the static content:
-        <pre><code>getFromResourceDirectory("app")</code></pre>
       </p>
       <p>
         In <a href="#code/app/index.html" class="shortcut">app\index.html</a> after the angular dependencies are included then the files for the angular app itself are included:
