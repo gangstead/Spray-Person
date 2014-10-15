@@ -2,11 +2,7 @@ package com.example.services
 
 import com.example.model.Person
 
-object PersonServiceImpl {
-  def apply(): PersonServiceImpl = new PersonServiceImpl()
-}
-
-class PersonServiceImpl extends PersonService {
+object PersonService {
   import PersonData.testPeople
 
   def getPersons: List[Person] = {

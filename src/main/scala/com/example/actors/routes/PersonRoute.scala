@@ -8,14 +8,24 @@ import akka.actor.Props
 import spray.http.StatusCodes
 import spray.httpx.SprayJsonSupport._
 import spray.routing.HttpServiceActor
+import spray.routing.HttpService
+import spray.httpx.SprayJsonSupport
+import akka.actor.Actor
 
 object PersonRoute {
-  def props(personService: PersonService): Props = Props(new PersonRoute(personService))
+  def props: Props = Props(new PersonRoute())
 }
 
-class PersonRoute(personService: PersonService) extends HttpServiceActor {
+class PersonRoute() extends Actor with PersonRouteTrait {
+  def actorRefFactory = context
+  def receive = runRoute(personRoute)
+}
 
-  def receive = runRoute {
+trait PersonRouteTrait extends HttpService with SprayJsonSupport{
+ 
+  private val personService = PersonService
+  
+  val personRoute = {
     get {
       pathEnd {
         complete {
@@ -51,5 +61,5 @@ class PersonRoute(personService: PersonService) extends HttpServiceActor {
       complete(StatusCodes.NoContent)
     }
   }
-
+  
 }
