@@ -7,7 +7,6 @@ import com.example.services.PersonService
 import akka.actor.Props
 import spray.http.StatusCodes
 import spray.httpx.SprayJsonSupport._
-import spray.routing.HttpServiceActor
 import spray.routing.HttpService
 import spray.httpx.SprayJsonSupport
 import akka.actor.Actor
@@ -22,9 +21,9 @@ class PersonRoute() extends Actor with PersonRouteTrait {
 }
 
 trait PersonRouteTrait extends HttpService with SprayJsonSupport{
- 
+
   private val personService = PersonService
-  
+
   val personRoute = {
     get {
       pathEnd {
@@ -61,5 +60,5 @@ trait PersonRouteTrait extends HttpService with SprayJsonSupport{
       complete(StatusCodes.NoContent)
     }
   }
-  
+
 }
