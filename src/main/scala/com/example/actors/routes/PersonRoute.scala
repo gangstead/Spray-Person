@@ -3,7 +3,6 @@ package com.example.actors.routes
 import com.example.model.Person
 import com.example.model.PersonJsonProtocol._
 import com.example.services.PersonService
-
 import akka.actor.Props
 import spray.http.StatusCodes
 import spray.httpx.SprayJsonSupport._
@@ -11,6 +10,7 @@ import spray.routing.HttpServiceActor
 import spray.routing.HttpService
 import spray.httpx.SprayJsonSupport
 import akka.actor.Actor
+import org.slf4j.LoggerFactory
 
 object PersonRoute {
   def props: Props = Props(new PersonRoute())
@@ -24,11 +24,13 @@ class PersonRoute() extends Actor with PersonRouteTrait {
 trait PersonRouteTrait extends HttpService with SprayJsonSupport{
  
   private val personService = PersonService
+  val log = LoggerFactory.getLogger(classOf[PersonRouteTrait])
   
   val personRoute = {
     get {
       pathEnd {
         complete {
+          log.debug("Hitting Get All Persons")
           val persons = personService.getPersons
           persons match {
             case head :: tail => persons
@@ -37,18 +39,21 @@ trait PersonRouteTrait extends HttpService with SprayJsonSupport{
         }
       } ~
       path(LongNumber) { personId =>
+        log.debug(s"Hitting Get Person by Id:${personId}")
         val person = personService.getPersonById(personId)
         complete(person)
       }
     } ~
     (post & pathEnd) {
       entity(as[Person]) { person =>
+        log.debug("posting to create a person")
         val newPerson = personService.addPerson(person)
         complete(StatusCodes.Created, newPerson)
       }
     } ~
     (put & path(LongNumber) & pathEnd) { personId =>
       entity(as[Person]) { person =>
+        log.debug(s"updating a person with the id: ${personId}")
         val updatedPerson = personService.updatePerson(person.copy(id = Some(personId)))
         updatedPerson match {
           case true => complete(StatusCodes.NoContent)
@@ -57,6 +62,7 @@ trait PersonRouteTrait extends HttpService with SprayJsonSupport{
       }
     } ~
     (delete & path(LongNumber) & pathEnd) { personId =>
+       log.debug(s"deleting a person with the id: ${personId}")
       personService.deletePerson(personId)
       complete(StatusCodes.NoContent)
     }
