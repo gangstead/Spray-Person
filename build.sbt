@@ -32,4 +32,6 @@ libraryDependencies ++= {
   )
 }
 
-unmanagedResourceDirectories in Compile <+= (baseDirectory) 
+unmanagedResourceDirectories in Compile <+= (baseDirectory)
+
+excludeFilter in unmanagedResources := HiddenFileFilter || "node_modules*" || "project*" || "target*"

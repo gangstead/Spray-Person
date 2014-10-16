@@ -2,6 +2,11 @@ package com.example.services
 
 import com.example.model.Person
 
+/**
+ * PersonService manages state of people in a mutable array
+ * for demo purposes.  In a full system this would call a DAO
+ * layer.
+ */
 object PersonService {
   import PersonData.testPeople
 

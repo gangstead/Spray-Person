@@ -11,6 +11,9 @@
         <p>More specifically, we'll use an Angular front-end client
             to interact with the API developed in Spray
         </p>
+        <p>
+          The data return through the endpoints is mocked data and stored in a mutable array instead of a database.
+        </p>
     </div>
 
     <div>
@@ -26,7 +29,7 @@
         <p><h3>Service Provider</h3></p>
         <p>The API for managing <a href="#code/src/main/scala/com/example/model/Person.scala" class="shortcut">Person</a>
            is provided by the Route (named personRoute) defined on the
-        <a href="#code/src/main/scala/com/example/actors/routes/PersonRoute.scala" class="shortcut">PersonRoute</a> class.</p>
+        <a href="#code/src/main/scala/com/example/actors/routes/PersonRoute.scala" class="shortcut">PersonRouteTrait</a> trait.</p>
 
         <p><h3>API Summary</h3></p>
         <p>GET /person to get all Persons<br/>
@@ -82,7 +85,7 @@
            <b>Method:</b> GET <br/>
            <b>Path:</b> api/person/${personId}</p>
            <b>Sample Call:</b><br/>
-           <pre><code>bash-3.2$ curl http://localhost:8080/apie/person/1
+           <pre><code>bash-3.2$ curl http://localhost:8080/api/person/1
 {
     "id": 1,
     "firstName": "John",
@@ -115,81 +118,75 @@
     </div>
 
     <div>
-        <h2>A Minor Caveat</h2>
-        <p>
-          The purpose of this template is to show you how to integrate an AngularJS front-end to a Spray Restful
-          back-end. So keep in mind that the data return through the endpoints is mocked data and no database was used
-          to store data.
-        </p>
-    </div>
-
-    <div>
         <h2>PersonRoute</h2>
-        <p><a href="#code/src/main/scala/com/example/actors/routes/PersonRoute.scala" class="shortcut">PersonRoute</a>
-         extends <a href="http://spray.io/documentation/1.1-SNAPSHOT/api/index.html#spray.routing.HttpServiceActor" target="_blank">spray.routing.HttpServiceActor</a>,
-         and provides the RESTful API for managing Person model object by passing the <a href="#code/src/main/scala/com/example/services/PersonService.scala" target="_blank">PersonService</a> to the constructor.</p>
+        <p><a href="#code/src/main/scala/com/example/actors/routes/PersonRoute.scala" class="shortcut">PersonRouteTrait</a>
+         extends <a href="http://spray.io/documentation/1.1-SNAPSHOT/api/index.html#spray.routing.HttpService" target="_blank">spray.routing.HttpService</a>,
+         and provides the RESTful API for managing Person model objects using the <a href="#code/src/main/scala/com/example/services/PersonService.scala" target="_blank">PersonService</a>.
+        </p>
         <p>Let's step through the code:</p>
 
         <p>1.  We first set up the routes for the GETS</p>
           <pre><code>
 get {
-        pathEnd {
-           val personList = personService.getPersonList
-           personList match{
-             case head::tail => complete(personList)
-             case nil => complete(StatusCodes.NoContent)
-
-           }
-            complete(personList)
-          }~
-          path(LongNumber){personId =>
-            val person = personService.getPersonById(personId)
-            complete(person)
-          }
-     }
+  pathEnd {
+    val personList = personService.getPersonList
+    personList match{
+      case head::tail => complete(personList)
+      case Nil => complete(StatusCodes.NoContent)
+    }
+      complete(personList)
+    }~
+    path(LongNumber){personId =>
+      val person = personService.getPersonById(personId)
+      complete(person)
+    }
+}
           </code></pre>
 
           <p>2.  Next we setup the POST Route</p>
           <pre><code>
-             post {
-       pathEnd {
-          entity(as[Person]) { person =>
-            val newPerson = personService.addPerson(person)
-            complete(newPerson)
-        }
-      }
+post {
+  pathEnd {
+    entity(as[Person]) { person =>
+      val newPerson = personService.addPerson(person)
+      complete(newPerson)
     }
+  }
+}
           </code></pre>
           <p>3.  Afer the POST Route we setup the PUT Route</p>
           <pre><code>
-              put{
-        path(LongNumber){personId =>
-           complete(StatusCodes.NoContent)
-        }
-      }
+put{
+  path(LongNumber){personId =>
+    complete(StatusCodes.NoContent)
+  }
+}
           </code></pre>
 
           <p>4.  Lastly we setup the DELETE Route</p>
           <pre><code>
-              delete{
-        path(LongNumber){pesonId =>
-           complete(StatusCodes.NoContent)
-        }
-      }
+delete{
+  path(LongNumber){pesonId =>
+    complete(StatusCodes.NoContent)
+  }
+}
           </code></pre>
-
-
-
-
     </div>
     <div>
         <h2>Front End</h2>
         <p>
           Now that the REST api is working it's time to get the Angular front end to work.
         </p>
+        <p><h3>Pre-built front end</h3></p>
+        <p>
+          The <a href="#code/dist" class="shortcut">dist</a> directory has been included in the project and is already built including minification.  Running the server will serve the app from here.  Any changes you make in here will get clobbered next time you build the front end with Grunt.  Normally this folder is not included in source control.
+        </p>
+        <p>
+          For front end development make your changes to the <a href="#code/app" class="shortcut">app</a> folder and follow the steps below:
+        </p>
         <p><h3>Install NPM</h3></p>
         <p>
-          The Front end requires Bower and Grunt, which are both NPM packages. Don't worry, you'll still be using Activator to run the app.  Your options for installing NPM are:
+          The front end requires Bower and Grunt, which are both NPM packages. Don't worry, you'll still be using Activator to run the app.  Your options for installing NPM are:
           <ul>
             <li>If you have a fancy package manager you can use
               <ul>
@@ -220,8 +217,21 @@ get {
         <p>
           Grunt will modify <a href="#code/app/index.html" class="shortcut">app\index.html</a> to include your dependencies
         </p>
+        <p><h3>Serve content from development directory</h3></p>
+        <p>
+          All of the content of the app is served from the static content directory. The static content is set by adding <code>dist</code>'s parent directory ("/") to the classpath in <a href="#code/build.sbt" class="shortcut">build.sbt</a>:
+          <pre><code>unmanagedResourceDirectories in Compile <+= (baseDirectory)</code></pre>
+          Then in <a href="#code/src/main/scala/com/example/actors/routes/ApiRouterActor.scala">ApiRouterActor</a> serve the static content:
+          <pre><code>getFromResourceDirectory("dist")</code></pre>
+        </p>
+        <p>
+          The above code will only get updated after you run the <code>grunt build</code> command.  To serve the app directly from the development directory change the resource directive to this:
+          <pre><code>getFromResourceDirectory("app")</code></pre>
+        </p>
         <p><h3>Visit the page!</h3></p>
-        <p>With the application running visit the page at:<pre><code><a href="http://localhost:8080/index.html" target="_blank">http://localhost:8080/index.html</a></code></pre>
+        <p>
+          With the application running visit the page at:<pre><code><a href="http://localhost:8080/index.html" target="_blank">http://localhost:8080/index.html</a></code></pre>
+        </p>
     </div>
     <div>
       <h2>Angular App Overview</h2>
@@ -229,13 +239,7 @@ get {
         Angular.js is too large of a frame work to explain here, but here's a starting point to understanding the code.
       </p>
       <p>
-        All of the content of the app is served from the static content directory. The static content is set by adding <code>app</code>'s parent directory ("/") to the classpath in <a href="#code/build.sbt" class="shortcut">build.sbt</a>:
-        <pre><code>unmanagedResourceDirectories in Compile <+= (baseDirectory)</code></pre>
-        Then in <a href="#code/src/main/scala/com/example/actors/routes/ApiRouterActor.scala">ApiRouterActor</a> serve the static content:
-        <pre><code>getFromResourceDirectory("app")</code></pre>
-      </p>
-      <p>
-        In <a href="#code/app/index.html" class="shortcut">app\index.html</a> after the angular dependencies are included then the files for the angular app itself are included:
+        In <a href="#code/app/index.html" class="shortcut">app\index.html</a> after the Angular dependencies are included then the files for the Angular app itself are included:
         <ul>
           <li>scripts/app.js</li>
           <li>scripts/controllers/main.js</li>
@@ -247,7 +251,7 @@ get {
         The router also determines which <a href="#code/app/scripts/controllers/main.js" class="shortcut">controller</a> to make active.
       </p>
       <p>
-        The <a href="#code/app/scripts/services/services.js" class="shortcut">GetPeople service</a> actually binds a REST endpoint of our Spray app to a javascript object.
+        The <a href="#code/app/scripts/services/services.js" class="shortcut">GetPeople service</a> actually binds a REST endpoint of our Spray app to a JavaScript object.
       </p>
       <p>
         The <a href="#code/app/views/person.html" class="shortcut">person view</a> iterates through our people returned by the REST back end and puts them on the page.

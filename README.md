@@ -2,6 +2,14 @@
 
 Angular JS front end with REST api powered by Spray.  Typesafe Activator template created by Credera
 
+## Front End
+
+The `\dist` directory has been included in the project and is already built including minification.
+	Running the server will serve the app from here so that it runs out of the box.  Any changes you make in here will get clobbered next time
+ you build the front end with grunt.  Normally this folder is not included in source control.
+
+For front end development make your changes to the `\app` folder and follow the steps below:
+
 ## Front End Setup
 
 Front end requires Bower, which requires npm
@@ -29,9 +37,17 @@ Wire up the dependencies with `grunt bowerInstall`
 *This modifies `app\index.html` to include your dependencies*
 
 
+## Change where static content is served from
+
+Lastly in `/src/main/scala/com/example/actors/routes/ApiRouterActor.scala` change where static content is served from:
+
+		getFromResourceDirectory("dist")
+
+		//becomes
+		
+		getFromResourceDirectory("app")
 
 ## Running Spray-Person
-Start sbt with `sbt`
 
 Start the application with `activator run` (or `sbt run`, same thing).
 
