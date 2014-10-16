@@ -41,7 +41,7 @@ trait PersonRouteTrait extends HttpService with SprayJsonSupport{
           val persons = personService.getPersons
           persons match {
             case head :: tail => persons
-            case nil => StatusCodes.NoContent
+            case Nil => StatusCodes.NoContent
           }
         }
       } ~

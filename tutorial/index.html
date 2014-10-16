@@ -137,7 +137,7 @@ get {
            val personList = personService.getPersonList
            personList match{
              case head::tail => complete(personList)
-             case nil => complete(StatusCodes.NoContent)
+             case Nil => complete(StatusCodes.NoContent)
 
            }
             complete(personList)
