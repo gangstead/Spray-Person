@@ -8,16 +8,16 @@
     "typesafe",
     "activator"
   ],
-  "homepage": "https://github.com/gangstead/Spray-Person",
-  "bugs": "https://github.com/gangstead/Spray-Person",
+  "homepage": "https://github.com/credera/spray-person",
+  "bugs": "https://github.com/credera/spray-person",
   "author": {
-    "name": "Gangstead",
+    "name": "Credera",
     "email": "",
-    "url": "https://github.com/gangstead"
+    "url": "https://github.com/credera"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gangstead/Spray-Person.git"
+    "url": "https://github.com/credera/spray-person.git"
   },
   "licenses": [
     {
