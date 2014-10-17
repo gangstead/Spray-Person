@@ -2,13 +2,11 @@
 
 angular.module('gangstead.SprayPerson')
 
-  .controller('MainCtrl', function($scope, $location, version) {
-    $scope.$path = $location.path.bind($location);
-    $scope.version = version;
+  .controller('MainCtrl', function($rootScope, $location) {
+    $rootScope.$path = $location.path.bind($location);
   })
-  .controller('PersonCtrl', function($scope, $location, $route, version, People) {
-    $scope.$path = $location.path.bind($location);
-    $scope.version = version;
+  .controller('PersonCtrl', function($scope, $rootScope, $location, $route, People) {
+    $rootScope.$path = $location.path.bind($location);
     $scope.people = People.query();
     $scope.canEdit = true;
     $scope.canDelete = true;
@@ -23,8 +21,8 @@ angular.module('gangstead.SprayPerson')
     };
 
   })
-  .controller('PersonViewCtrl', function($scope, $location, $route, $routeParams, version, People) {
-    $scope.$path = $location.path.bind($location);
+  .controller('PersonViewCtrl', function($scope, $rootScope, $location, $routeParams, People) {
+    $rootScope.$path = $location.path.bind($location);
     $scope.person=People.get({id:$routeParams.id});
     $scope.canEdit = true;
     $scope.canDelete = true;
@@ -39,8 +37,8 @@ angular.module('gangstead.SprayPerson')
     };
 
   })
-  .controller('PersonEditCtrl', function($scope, $location, $route, $routeParams, version, People) {
-    $scope.$path = $location.path.bind($location);
+  .controller('PersonEditCtrl', function($scope, $rootScope, $location, $routeParams, People) {
+    $rootScope.$path = $location.path.bind($location);
     $scope.person=People.get({id:$routeParams.id});
     $scope.canEdit = false;
     $scope.canDelete = true;
@@ -56,8 +54,8 @@ angular.module('gangstead.SprayPerson')
       });
     };
   })
-  .controller('PersonNewCtrl', function($scope, $location, $route, $routeParams, version, People) {
-    $scope.$path = $location.path.bind($location);
+  .controller('PersonNewCtrl', function($scope, $rootScope, $location, People) {
+    $rootScope.$path = $location.path.bind($location);
     $scope.person = new People();
     $scope.canEdit = false;
     $scope.canDelete = false;
