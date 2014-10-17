@@ -17,6 +17,18 @@ angular.module('gangstead.SprayPerson', ['ngAnimate', 'ngRoute','ngResource'])
         templateUrl: 'views/person.html',
         controller: 'PersonCtrl'
       })
+      .when('/person/new', {
+        templateUrl: 'views/person-new.html',
+        controller: 'PersonNewCtrl'
+      })
+      .when('/person/:id', {
+        templateUrl: 'views/person-view.html',
+        controller: 'PersonViewCtrl'
+      })
+      .when('/person/:id/edit', {
+        templateUrl: 'views/person-edit.html',
+        controller: 'PersonEditCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

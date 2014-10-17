@@ -32,6 +32,10 @@ libraryDependencies ++= {
   )
 }
 
+//sbt-revolver plugin allows restarting the application when files change (including angular files in the /app folder)
+//Just run sbt or activator with the command `~ re-start` instead of `run`
+Revolver.settings
+
 unmanagedResourceDirectories in Compile <+= (baseDirectory)
 
 excludeFilter in unmanagedResources := HiddenFileFilter || "node_modules*" || "project*" || "target*"
