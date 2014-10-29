@@ -207,6 +207,7 @@ module.exports = function(grunt) {
         root: '<%= yo.app %>'
       }
     },
+<<<<<<< HEAD
     imagemin: {
       dist: {
         files: [{
@@ -227,6 +228,8 @@ module.exports = function(grunt) {
         }]
       }
     },
+=======
+>>>>>>> credera/master
     htmlmin: {
       dist: {
         options: {
@@ -306,9 +309,13 @@ module.exports = function(grunt) {
         'copy:styles'
       ],
       dist: [
+<<<<<<< HEAD
         'copy:styles',
         'imagemin',
         'svgmin'
+=======
+        'copy:styles'
+>>>>>>> credera/master
       ]
     },
 
