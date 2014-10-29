@@ -11,12 +11,9 @@
         <p>More specifically, we'll use an Angular front-end client
             to interact with the API developed in Spray
         </p>
-<<<<<<< HEAD
-=======
         <p>
           The data return through the endpoints is mocked data and stored in a mutable array instead of a database.
         </p>
->>>>>>> credera/master
     </div>
 
     <div>
@@ -30,15 +27,9 @@
     <div>
         <h2>Person HTTP API</h2>
         <p><h3>Service Provider</h3></p>
-<<<<<<< HEAD
-        <p>The API for managing <a href="#code/src/main/scala/com/example/model/Peron.scala" class="shortcut">Person</a>
-           is provided by the Route (named personRoute) defined on the
-        <a href="#code/src/main/scala/com/example/actors/routes/PersonRoute.scala" class="shortcut">PersonRoute</a> class.</p>
-=======
         <p>The API for managing <a href="#code/src/main/scala/com/example/model/Person.scala" class="shortcut">Person</a>
            is provided by the Route (named personRoute) defined on the
         <a href="#code/src/main/scala/com/example/actors/routes/PersonRoute.scala" class="shortcut">PersonRouteTrait</a> trait.</p>
->>>>>>> credera/master
 
         <p><h3>API Summary</h3></p>
         <p>GET /person to get all Persons<br/>
@@ -75,22 +66,13 @@
            <b>Path:</b> /api/person</p>
            <b>Sample Call:</b><br/>
            <pre><code>bash-3.2$ curl -X POST \
-<<<<<<< HEAD
-> -H "Content-Type: application/json" \
-> -d '{
-=======
  -H "Content-Type: application/json" \
  -d '{
->>>>>>> credera/master
         "firstName": "Bill",
         "lastName": "Smith",
         "age": 5
     }' \
-<<<<<<< HEAD
-> http://localhost:8080/api/person
-=======
  http://localhost:8080/api/person
->>>>>>> credera/master
 {
     "id": 3,
     "firstName": "Bill",
@@ -103,11 +85,7 @@
            <b>Method:</b> GET <br/>
            <b>Path:</b> api/person/${personId}</p>
            <b>Sample Call:</b><br/>
-<<<<<<< HEAD
-           <pre><code>bash-3.2$ curl http://localhost:8080/apie/person/1
-=======
            <pre><code>bash-3.2$ curl http://localhost:8080/api/person/1
->>>>>>> credera/master
 {
     "id": 1,
     "firstName": "John",
@@ -121,22 +99,13 @@
            <b>Path:</b> /api/person/${personId}</p>
            <b>Sample Call:</b><br/>
            <pre><code>bash-3.2$ curl -X PUT \
-<<<<<<< HEAD
-> -H "Content-Type: application/json" \
-> -d '{
-=======
  -H "Content-Type: application/json" \
  -d '{
->>>>>>> credera/master
         "firstName": "Bill",
         "lastName": "Smith",
         "age": 5
     }' \
-<<<<<<< HEAD
-> http://localhost:8080/api/person/3
-=======
  http://localhost:8080/api/person/3
->>>>>>> credera/master
 204
            </code></pre>
 
@@ -149,48 +118,16 @@
     </div>
 
     <div>
-<<<<<<< HEAD
-        <h2>A Minor Caveat</h2>
-        <p>
-          The purpose of this template is to show you how to integrate an AngularJS front-end to a Spray Restful
-          back-end. So keep in mind that the data return through the endpoints is mocked data and no database was used
-          to store data.
-        </p>
-    </div>
-
-    <div>
-        <h2>PersonRoute</h2>
-        <p><a href="#code/src/main/scala/com/example/actors/routes/PersonRoute.scala" class="shortcut">PersonRoute</a>
-         extends <a href="https://github.com/spray/spray/blob/master/spray-routing/src/main/scala/spray/routing/HttpServiceActor.scala" target="_blank">spray.routing.HttpServiceActor</a>,
-         and provides the RESTful API for managing Person model object by injecting the <a href="#code/src/main/scala/com/example/services/PersonService.scala" target="_blank">PersonService</a></p>
-=======
         <h2>PersonRoute</h2>
         <p><a href="#code/src/main/scala/com/example/actors/routes/PersonRoute.scala" class="shortcut">PersonRouteTrait</a>
          extends <a href="http://spray.io/documentation/1.1-SNAPSHOT/api/index.html#spray.routing.HttpService" target="_blank">spray.routing.HttpService</a>,
          and provides the RESTful API for managing Person model objects using the <a href="#code/src/main/scala/com/example/services/PersonService.scala" target="_blank">PersonService</a>.
         </p>
->>>>>>> credera/master
         <p>Let's step through the code:</p>
 
         <p>1.  We first set up the routes for the GETS</p>
           <pre><code>
 get {
-<<<<<<< HEAD
-        pathEnd {
-           val personList = personService.getPersonList
-           personList match{
-             case head::tail => complete(personList)
-             case nil => complete(StatusCodes.NoContent)
-
-           }
-            complete(personList)
-          }~
-          path(LongNumber){personId =>
-            val person = personService.getPersonById(personId)
-            complete(person)
-          }
-     }
-=======
   pathEnd {
     val personList = personService.getPersonList
     personList match{
@@ -204,29 +141,10 @@ get {
       complete(person)
     }
 }
->>>>>>> credera/master
           </code></pre>
 
           <p>2.  Next we setup the POST Route</p>
           <pre><code>
-<<<<<<< HEAD
-             post {
-       pathEnd {
-          entity(as[Person]) { person =>
-            val newPerson = personService.addPerson(person)
-            complete(newPerson)
-        }
-      }
-    }
-          </code></pre>
-          <p>3.  Afer the POST Route we setup the PUT Route</p>
-          <pre><code>
-              put{
-        path(LongNumber){personId =>
-           complete(StatusCodes.NoContent)
-        }
-      }
-=======
 post {
   pathEnd {
     entity(as[Person]) { person =>
@@ -243,41 +161,22 @@ put{
     complete(StatusCodes.NoContent)
   }
 }
->>>>>>> credera/master
           </code></pre>
 
           <p>4.  Lastly we setup the DELETE Route</p>
           <pre><code>
-<<<<<<< HEAD
-              delete{
-        path(LongNumber){pesonId =>
-           complete(StatusCodes.NoContent)
-        }
-      }
-          </code></pre>
-
-
-
-
-=======
 delete{
   path(LongNumber){pesonId =>
     complete(StatusCodes.NoContent)
   }
 }
           </code></pre>
->>>>>>> credera/master
     </div>
     <div>
         <h2>Front End</h2>
         <p>
           Now that the REST api is working it's time to get the Angular front end to work.
         </p>
-<<<<<<< HEAD
-        <p><h3>Install NPM</h3></p>
-        <p>
-          The Front end requires Bower and Grunt, which are both NPM packages. Don't worry, you'll still be using Activator to run the app.  Your options for installing NPM are:
-=======
         <p><h3>Pre-built front end</h3></p>
         <p>
           The <a href="#code/dist" class="shortcut">dist</a> directory has been included in the project and is already built including minification.  Running the server will serve the app from here.  Any changes you make in here will get clobbered next time you build the front end with Grunt.  Normally this folder is not included in source control.
@@ -288,7 +187,6 @@ delete{
         <p><h3>Install NPM</h3></p>
         <p>
           The front end requires Bower and Grunt, which are both NPM packages. Don't worry, you'll still be using Activator to run the app.  Your options for installing NPM are:
->>>>>>> credera/master
           <ul>
             <li>If you have a fancy package manager you can use
               <ul>
@@ -319,10 +217,6 @@ delete{
         <p>
           Grunt will modify <a href="#code/app/index.html" class="shortcut">app\index.html</a> to include your dependencies
         </p>
-<<<<<<< HEAD
-        <p><h3>Visit the page!</h3></p>
-        <p>With the application running visit the page at:<pre><code><a href="http://localhost:8080/index.html" target="_blank">http://localhost:8080/index.html</a></code></pre>
-=======
         <p><h3>Serve content from development directory</h3></p>
         <p>
           All of the content of the app is served from the static content directory. The static content is set by adding <code>dist</code>'s parent directory ("/") to the classpath in <a href="#code/build.sbt" class="shortcut">build.sbt</a>:
@@ -338,7 +232,6 @@ delete{
         <p>
           With the application running visit the page at:<pre><code><a href="http://localhost:8080/index.html" target="_blank">http://localhost:8080/index.html</a></code></pre>
         </p>
->>>>>>> credera/master
     </div>
     <div>
       <h2>Angular App Overview</h2>
@@ -346,15 +239,7 @@ delete{
         Angular.js is too large of a frame work to explain here, but here's a starting point to understanding the code.
       </p>
       <p>
-<<<<<<< HEAD
-        All of the content of the app is served from the static content directory. Which is specified in <a href="#code/build.sbt" class="shortcut">build.sbt</a> to be:
-        <pre><code>webappSrc in webapp := baseDirectory.value / "app"</code></pre>
-      </p>
-      <p>
-        In <a href="#code/app/index.html" class="shortcut">app\index.html</a> after the angular dependencies are included then the files for the angular app itself are included:
-=======
         In <a href="#code/app/index.html" class="shortcut">app\index.html</a> after the Angular dependencies are included then the files for the Angular app itself are included:
->>>>>>> credera/master
         <ul>
           <li>scripts/app.js</li>
           <li>scripts/controllers/main.js</li>
@@ -366,11 +251,7 @@ delete{
         The router also determines which <a href="#code/app/scripts/controllers/main.js" class="shortcut">controller</a> to make active.
       </p>
       <p>
-<<<<<<< HEAD
-        The <a href="#code/app/scripts/services/services.js" class="shortcut">GetPeople service</a> actually binds a REST endpoint of our Spray app to a javascript object.
-=======
         The <a href="#code/app/scripts/services/services.js" class="shortcut">People service</a> actually binds a REST endpoint of our Spray app to a JavaScript object.
->>>>>>> credera/master
       </p>
       <p>
         The <a href="#code/app/views/person.html" class="shortcut">person view</a> iterates through our people returned by the REST back end and puts them on the page.

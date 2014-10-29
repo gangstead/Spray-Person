@@ -2,11 +2,6 @@
 
 angular.module('gangstead.SprayPerson', ['ngAnimate', 'ngRoute','ngResource'])
 
-<<<<<<< HEAD
-  .constant('version', 'v0.1.0')
-
-=======
->>>>>>> credera/master
   .config(function($locationProvider, $routeProvider) {
 
     $locationProvider.html5Mode(false);
@@ -20,8 +15,6 @@ angular.module('gangstead.SprayPerson', ['ngAnimate', 'ngRoute','ngResource'])
         templateUrl: 'views/person.html',
         controller: 'PersonCtrl'
       })
-<<<<<<< HEAD
-=======
       .when('/person/new', {
         templateUrl: 'views/person-new.html',
         controller: 'PersonNewCtrl'
@@ -34,7 +27,6 @@ angular.module('gangstead.SprayPerson', ['ngAnimate', 'ngRoute','ngResource'])
         templateUrl: 'views/person-edit.html',
         controller: 'PersonEditCtrl'
       })
->>>>>>> credera/master
       .otherwise({
         redirectTo: '/'
       });

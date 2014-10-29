@@ -207,29 +207,6 @@ module.exports = function(grunt) {
         root: '<%= yo.app %>'
       }
     },
-<<<<<<< HEAD
-    imagemin: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yo.app %>/images',
-          src: '{,*/}*.{png,jpg,jpeg,gif}',
-          dest: '<%= yo.dist %>/images'
-        }]
-      }
-    },
-    svgmin: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yo.app %>/images',
-          src: '{,*/}*.svg',
-          dest: '<%= yo.dist %>/images'
-        }]
-      }
-    },
-=======
->>>>>>> credera/master
     htmlmin: {
       dist: {
         options: {
@@ -309,13 +286,7 @@ module.exports = function(grunt) {
         'copy:styles'
       ],
       dist: [
-<<<<<<< HEAD
-        'copy:styles',
-        'imagemin',
-        'svgmin'
-=======
         'copy:styles'
->>>>>>> credera/master
       ]
     },
 

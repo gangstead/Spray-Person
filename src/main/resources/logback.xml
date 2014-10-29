@@ -17,10 +17,7 @@
     </appender> -->
 
     <logger name="akka" level="INFO" />
-<<<<<<< HEAD
-    <logger name="org.eclipse.jetty" level="INFO" />
-=======
->>>>>>> credera/master
+
     <logger name="com.example" level="DEBUG" />
 
     <root level="DEBUG">

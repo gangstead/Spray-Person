@@ -2,13 +2,6 @@ package com.example.services
 
 import com.example.model.Person
 
-<<<<<<< HEAD
-trait PersonService {
-
-  def getPersonList():List[Person]
-  def getPersonById(id:Long):Option[Person]
-  def addPerson(person:Person):Person
-=======
 /**
  * PersonService manages state of people in a mutable array
  * for demo purposes.  In a full system this would call a DAO
@@ -45,6 +38,5 @@ object PersonService {
       case None =>
     }
   }
->>>>>>> credera/master
 
 }
