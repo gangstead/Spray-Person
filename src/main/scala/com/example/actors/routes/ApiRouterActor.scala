@@ -1,6 +1,7 @@
 package com.example.actors.routes
 
-import scala.concurrent.duration.Duration
+import scala.concurrent.duration.DurationInt
+import scala.language.postfixOps
 import akka.actor.Actor
 import akka.actor.ActorRef
 import akka.actor.ActorLogging
@@ -19,7 +20,7 @@ class ApiRouterActor(personRoute: ActorRef)extends Actor
 												with ActorLogging{
 
   def actorRefFactory = context
-  val simpleCache = routeCache(maxCapacity = 1000, timeToIdle = Duration("30 min"))
+  val simpleCache = routeCache(maxCapacity = 1000, timeToIdle = 30 minutes)
   def receive = runRoute {
      compressResponseIfRequested(){
          pathPrefix("person") { ctx => personRoute ! ctx }
